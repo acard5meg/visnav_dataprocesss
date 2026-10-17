@@ -1,0 +1,5 @@
+To download data point and click on Github. Need to reach out to author for all sequences
+https://github.com/robot-pesg/BotanicGarden?tab=readme-ov-file
+
+There's an error with the following bag: 1005_06_VLIO.bag
+All other bags are downloaded

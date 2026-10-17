@@ -1,0 +1,5 @@
+mission_names: ["GrandTourDataset"]
+
+download_folder: /mnt/datasets/GNM/raw_data/anymal
+
+patterns: ["*"]

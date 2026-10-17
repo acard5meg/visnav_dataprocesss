@@ -1,0 +1,563 @@
+scand: 
+  odomtopics: ["/odom", "/jackal_velocity_controller/odom"]
+  imtopics: ["/image_raw/compressed", "/camera/rgb/image_raw/compressed", "/left/image_color/compressed"] # image_raw: 30Hz, camera: 30.1Hz
+  img_process_func: "process_scand_img"
+  odom_process_func: "nav_to_xyz_rpy"
+  distortion_coefficients:
+    - 0.6671934723854065
+    - -3.1600592136383057
+    - 0.0004678548430092633
+    - -0.0004770300292875618
+    - 1.8223274946212769
+    - 0.5343461036682129
+    - -2.9515035152435303
+    - 1.7315576076507568
+  distortion_model: XXXXXXXXX
+  camera_matrix:
+    - - 608.1159057617188
+      - 0.0
+      - 639.1864013671875
+    - - 0.0
+      - 607.8717041015625
+      - 363.0690612792969
+    - - 0.0
+      - 0.0
+      - 1.0
+  rotation_matrix_spot:
+    - - 0.0
+      - -1.0
+      - 0.0
+      - 0.05
+    - - -0.08715574
+      - 0.0
+      - -0.9961947
+      - 0.91400635
+    - - 0.9961947
+      - 0.0
+      - -0.08715574
+      - -0.12079877
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+  rotation_matrix_jackal:
+    - - 0.0
+      - -1.0
+      - 0.0
+      - 0.05
+    - - -0.20791169
+      - 0.0
+      - -0.9781476
+      - 0.54105175
+    - - 0.9781476
+      - 0.0
+      - -0.20791169
+      - -0.14058107
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+  # Assumed because odometry and base link are not attached in tf tree
+  # assuming the odometry frame is in standard frame of reference
+  conv_coord_axis:  
+    - - 1.0
+      - 0.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 1.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 1.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+  top_speed_spot: 1.6
+  top_speed_jackal: 2.0
+  angular_velocity: XXXXXXXXX
+  image_resolution: [1280, 720] # [width, height]
+  robot_spot: "Boston Dynamics Spot"
+  width_spot: 0.8 # meters
+  robot_jackal: "Clearpath Jackal"
+  width_jackal: 0.43 # meters
+  camera_projection: 0.1 # meters
+
+tartan_drive_2:
+  odomtopics: "/odometry/filtered_odom"
+  imtopics: "/multisense/left/image_rect_color" # 10Hz
+  img_process_func: "process_tartan_img"
+  odom_process_func: "nav_to_xyz_rpy"
+  distortion_coefficients: 
+    - -0.03597196191549301
+    - 0.08101943135261536
+    - -0.00028405245393514633
+    - 0.0011874435003846884
+    - -0.03709280863404274
+  distortion_model: plumb_bob
+  camera_matrix:
+    - - 455.77496337890625
+      - 0.0
+      - 497.1180114746094
+    - - 0.0
+      - 456.319091796875
+      - 251.58502197265625
+    - - 0.0
+      - 0.0
+      - 1.0
+  # Get rotation/translation from lookupTransform in Tartan2
+  # from vehicle to multisense/left_camera_optical_frame
+  rotation_matrix:
+    - - -9.9998333293864726e-03
+      - -9.9995000041671300e-01
+      - -1.0598397159888862e-12
+      - 3.4999999999864917e-02
+    - - -2.1655945444568836e-01
+      - 2.1656667338286681e-03
+      - -9.7626702934073506e-01
+      - -1.2637641953800965e-01
+    - - 9.7621821639609363e-01 
+      - -9.7625075781530846e-03
+      - -2.1657028286959451e-01
+      - -2.7591054037747954e-02
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+  conv_coord_axis:  
+    - - 1.0
+      - 0.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 1.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 1.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+
+  top_speed: 6.0
+  robot: 'Yamaha Viking ATV'
+  width: 1.6256 # meters
+  angular_velocity: XXXXXXXXX
+  image_resolution: [1024, 544]  # [width, height]
+  camera_projection: 0.8 # meters
+
+tartan_drive_1:
+  odomtopics: "/odometry/filtered_odom"
+  imtopics: "/multisense/left/image_rect_color" # 20.1Hz
+  img_process_func: "process_tartan_img"
+  odom_process_func: "nav_to_xyz_rpy"
+  distortion_coefficients: 
+    - -0.03597196191549301
+    - 0.08101943135261536
+    - -0.00028405245393514633
+    - 0.0011874435003846884
+    - -0.03709280863404274
+  distortion_model: plumb_bob
+  camera_matrix:
+    - - 455.77496337890625
+      - 0.0
+      - 497.1180114746094
+    - - 0.0
+      - 456.319091796875
+      - 251.58502197265625
+    - - 0.0
+      - 0.0
+      - 1.0
+  # rotation matrix to convert from enu to optical frame
+  rotation_matrix:
+    - - 9.9994999e-01
+      - -9.9998331e-03
+      - -1.0598397159888862e-12
+      - 3.5000000e-02
+    - - -2.1656668e-03
+      - -2.1655945e-01
+      - -9.7626704e-01
+      - -1.2637641953800965e-01
+    - - 9.7625079e-03
+      - 9.7621822e-01
+      - -2.1657029e-01
+      - -2.7591053e-02
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+  # Assuming ENU coordinate based on pre-processing in GNM
+  conv_coord_axis:  
+    - - 0.0
+      - 1.0
+      - 0.0
+      - 0.0
+    - - -1.0
+      - 0.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 1.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+
+  top_speed: 6.0
+  robot: 'Yamaha Viking ATV'
+  width: 1.6256 # meters
+  angular_velocity: XXXXXXXXX
+  image_resolution: [1024, 544]  # [width, height]
+  camera_projection: 0.8 # meters
+
+rellis_3d:
+  odomtopics: "/odometry/filtered"
+  imtopics: "/pylon_camera_node/image_raw" #10Hz
+  img_process_func: process_rellis_3d_img
+  odom_process_func: "nav_to_xyz_rpy"
+  # pylon camera
+  distortion_coefficients: 
+    - -0.134313
+    - -0.025905
+    - 0.002181
+    - 0.00084
+    - 0.0
+  distortion_model: plumb_bomb
+  # pylon_camera
+  camera_matrix:
+    - - 2813.643275
+      - 0.0
+      - 969.285772
+    - - 0.0
+      - 2808.326079
+      - 624.049972
+    - - 0.0
+      - 0.0
+      - 1.0
+  rotation_matrix:
+    - - -0.03567200000000004
+      - 0.99868 
+      - 0.008908000000000027
+      - -0.02165510200000001
+    - - -0.004840000000000011  
+      - -0.008415999999999979
+      - 0.99928
+      - 0.677425997 
+    - - 0.998708
+      - 0.03496000000000005
+      - 0.005821999999999994
+      - -0.31946263599999997
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+  # The odometry is in the odom frame assuming conventional axis system
+  conv_coord_axis:  
+    - - 1.0
+      - 0.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 1.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 1.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+
+  top_speed: 5.0 # m/s
+  robot: 'Clearpath Warthog'
+  width: 1.38 # meters
+  angular_velocity: XXXXXXXXX
+  # pylon camera
+  image_resolution: [1920, 1200] # [width, height]
+  camera_projection: 0.5 # meters
+
+anymal:
+  odombag: anymal_state # specific to anymal b/c sensor streams split into multiple bags
+  odomtopics: /anymal/state_estimator/odometry
+  imbag: hdr_front # specific to anymal b/c sensor streams split into multiple bags
+  imtopics: /boxi/hdr/front/image_raw/compressed #10Hz
+  img_process_func: "process_scand_img" # format: jpg
+  odom_process_func: "nav_to_xyz_rpy"
+  distortion_coefficients: 
+    - -0.06150262047071293
+    - 0.003455916289334078
+    - -0.001233506511528716
+    - -1.770797322903057e-07
+    - 0.0
+  distortion_model: equidistant
+  camera_matrix:
+    - - 984.407734999804
+      - 0.0
+      - 952.3920462113495
+    - - 0.0
+      - 983.8103917846685
+      - 638.6385463949282
+    - - 0.0
+      - 0.0
+      - 1.0
+  rotation_matrix:
+    - - -7.2706006197303793e-03
+      - -9.9996282570722184e-01
+      - -4.6352529873212658e-03
+      -  1.4116312527707231e-02
+    - - -1.8627751979419550e-04
+      - 4.6367297959723740e-03
+      - -9.9998923296077780e-01
+      - 1.7763276215505908e-01
+    - - 9.9997355148389500e-01
+      - -7.2696588934582414e-03
+      - -2.1998240558725578e-04
+      - -4.4586320477551061e-01
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+  # The odometry is in the odom frame assuming conventional axis system
+  conv_coord_axis:  
+    - - 1.0
+      - 0.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 1.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 1.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+  top_speed: 0.75 # m/s
+  robot: 'Anybotics Anymal'
+  width: 0.53 # meters
+  angular_velocity: XXXXXXXXX
+  image_resolution: [1920, 1280] # [width, height]
+  camera_projection: 0.1 # meters
+
+sub_t_tunnel:
+  odomtopics: "/chinook/odom" # "chinook/odom" -> "chinook/base"
+  imtopics: "/chinook/multisense/left/image_rect_color/compressed" # "chinook/multisense/left_camera_optical_frame"; 10Hz
+  img_process_func: "process_subt_tunnel_img"
+  odom_process_func: "nav_to_xyz_rpy"
+  distortion_coefficients: 
+    - -0.20848242938518524
+    - 0.1229957863688469
+    - 0.0005989724886603653
+    - -0.00030653737485408783
+    - 0.0046302578411996365
+  distortion_model: plumb_bob
+  camera_matrix:
+    - - 600.7606201171875
+      - 0.0
+      - 530.7537841796875
+    - - 0.0
+      - 602.1273193359375
+      - 272.0735778808594
+    - - 0.0
+      - 0.0
+      - 1.0
+  rotation_matrix:
+    - - 4.8965276278067904e-12
+      - -1.0  
+      - 0.0
+      - 3.4999999998947262e-02
+    - - 4.8965276278067904e-12  
+      - 0.0
+      - -1.0
+      - 5.4799999999894733e-01 
+    - - 1.0
+      - 4.8965276278067904e-12
+      - 4.8965276278067904e-12
+      - -2.1500000000285469e-01
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+  # The odometry is in the odom frame assuming conventional axis system
+  conv_coord_axis:  
+    - - 1.0
+      - 0.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 1.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 1.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+  top_speed: 2.0 # m/s
+  robot: 'Clearpath Husky'
+  width: 0.698 # meters
+  angular_velocity: XXXXXXXXX
+  image_resolution: [1024, 544] # [width, height]
+  camera_projection: 0.1 # meters
+
+botanic_garden:
+  odomtopics: "/odom"
+  imtopics: "/dalsa_color/left/image_raw" # bgr8 encoding, 10Hz
+  img_process_func: "process_tartan_img"
+  odom_process_func: "nav_to_xyz_rpy"
+  distortion_coefficients: 
+    - -0.063225205921112 #k1
+    - 0.100254763768352 #k2
+    - 0.0 #p1
+    - 0.0 #p2
+    - 0.0 #k3
+  distortion_model: radial
+  camera_matrix:
+    - - 642.5187447940675
+      - 0.0
+      - 460.96376252439694
+    - - 0.0
+      - 641.452660485901
+      - 307.8916862338635
+    - - 0.0
+      - 0.0
+      - 1.0
+  rotation_matrix: 
+    - - -0.00140533
+      - -0.99999021  
+      - -0.00419406
+      - 0.14699852
+    - - -0.00896722
+      - 0.00420651
+      - -0.99995094
+      - 0.83717713
+    - - 0.9999588
+      - -0.00136765
+      - -0.00897303
+      - -0.2033186
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+  # The odometry is in the odom frame assuming conventional axis system
+  conv_coord_axis:  
+    - - 1.0
+      - 0.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 1.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 1.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+  top_speed: 1.5 # m/s
+  robot: 'AgileX Scout'
+  width: 0.58 # meters
+  angular_velocity: XXXXXXXXX
+  image_resolution: [960, 600] # [width, height]
+  camera_projection: 0.1 # meters
+
+gnd:
+  odomtopics: "/odometry/filtered"
+  imtopics: ["zed_node/rgb/image_rect_color/compressed", "/camera", "/camera_processed"] # bgra8; jpeg compressed bgr8, bgr8; 15Hz
+  img_process_func: "process_scand_img"
+  img_process_func_umd: "process_tartan_img"
+  odom_process_func: "nav_to_xyz_rpy"
+  distortion_coefficients: 
+    - 0.0 #k1
+    - 0.0 #k2
+    - 0.0 #p1
+    - 0.0 #p2
+    - 0.0 #k3
+  distortion_coefficients_umd: 
+    - -0.297079 #k1
+    - 0.067079 #k2
+    - 0.000428 #p1
+    - -0.001216 #p2
+    - 0.0 #k3
+  distortion_model: plumb_bob
+  camera_matrix:
+    - - 263.79937744140625
+      - 0.0
+      - 328.877685546875
+    - - 0.0
+      - 263.79937744140625
+      - 178.5534210205078
+    - - 0.0
+      - 0.0
+      - 1.0
+  camera_matrix_umd:
+    - - 372.249228
+      - 0.0
+      - 329.004307
+    - - 0.0
+      - 368.579114
+      - 227.902136
+    - - 0.0
+      - 0.0
+      - 1.0
+  rotation_matrix: 
+    - - 2.2204460492503131e-16
+      - -1.0
+      - 0.0
+      - 5.9999999999999984e-02
+    - - -4.9979169270678137e-02 
+      - 0.0
+      - -9.9875026039496617e-01
+      - 1.4981253905924495e-02
+    - - 9.9875026039496617e-01 
+      - 2.2204460492503131e-16
+      - -4.9979169270678137e-02
+      - 1.0749687539060158e-02
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+  # The odometry is in the odom frame assuming conventional axis system
+  conv_coord_axis:  
+    - - 1.0
+      - 0.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 1.0
+      - 0.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 1.0
+      - 0.0
+    - - 0.0
+      - 0.0
+      - 0.0
+      - 1.0
+  top_speed: 2.0 # m/s
+  robot: "Clearpath Jackal"
+  width: 0.43 # meters
+  angular_velocity: XXXXXXXXX
+  image_resolution: [640, 360] # [width, height]
+  image_resolution_umd: [640, 480] # [width, height]
+  camera_projection: 0.1 # meters

@@ -1,0 +1,11 @@
+download_filepath: /home/card20-robotixx-vm/world_model_dataprocess/data_process/data_download/tartan2/assets/files_all.yaml
+
+access_key: nFNreHkFY2ca56vIHVaU
+
+secret_key: IHnkXfe30TjJxkVpF8LuP8wQ7kWoMRrb5QpwcK7Z
+
+endpoint_url: airlab-share-02.andrew.cmu.edu:9000
+
+bucket_name: tartandrive2
+
+output_filepath: /mnt/datasets/GNM/raw_data/tartan2
